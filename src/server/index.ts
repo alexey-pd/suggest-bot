@@ -1,7 +1,5 @@
-import type { AddressInfo } from 'node:net'
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
-import { serve } from '@hono/node-server'
 import { webhookCallback } from 'grammy'
 import { getPath } from 'hono/utils/url'
 import { requestId } from './middlewares/request-id.js'
@@ -46,24 +44,6 @@ export function createServer(bot: Bot) {
 
   server.get('/', c => c.json({ status: true }))
 
-  server.get(`/${bot.token}`, async (c) => {
-    const hostname = c.req.header("x-forwarded-host");
-    if (typeof hostname === "string") {
-      const webhookUrl = new URL("webhook", `https://${hostname}`).href;
-      await bot.api.setWebhook(webhookUrl, {
-        allowed_updates: config.BOT_ALLOWED_UPDATES,
-        secret_token: config.BOT_WEBHOOK_SECRET,
-      });
-      return c.json({
-        status: true,
-      });
-    }
-    c.status(500);
-    return c.json({
-      status: false,
-    });
-  });
-
   server.post(
     '/webhook',
     webhookCallback(bot, 'hono', {
@@ -77,25 +57,19 @@ export function createServer(bot: Bot) {
 export type Server = Awaited<ReturnType<typeof createServer>>
 
 export function createServerManager(server: Server) {
-  let handle: undefined | ReturnType<typeof serve>
+  let handle: undefined | ReturnType<typeof Bun.serve>
   return {
-    start: (host: string, port: number) =>
-      new Promise<AddressInfo>((resolve) => {
-        handle = serve(
-          {
-            fetch: server.fetch,
-            hostname: host,
-            port,
-          },
-          info => resolve(info),
-        )
-      }),
+    start: (host: string, port: number) => {
+      handle = Bun.serve({
+        fetch: server.fetch,
+        hostname: host,
+        port,
+      })
+      return {
+        url: handle.url,
+      }
+    },
     stop: () =>
-      new Promise<void>((resolve) => {
-        if (handle)
-          handle.close(() => resolve())
-        else
-          resolve()
-      }),
+      handle?.stop(),
   }
 }

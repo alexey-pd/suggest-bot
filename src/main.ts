@@ -58,10 +58,17 @@ async function startWebhook() {
   )
   logger.info({
     msg: 'Server started',
-    url:
-      info.family === 'IPv6'
-        ? `http://[${info.address}]:${info.port}`
-        : `http://${info.address}:${info.port}`,
+    url: info.url,
+  })
+
+  // set webhook
+  await bot.api.setWebhook(config.BOT_WEBHOOK, {
+    allowed_updates: config.BOT_ALLOWED_UPDATES,
+    secret_token: config.BOT_WEBHOOK_SECRET,
+  })
+  logger.info({
+    msg: 'Webhook was set',
+    url: config.BOT_WEBHOOK,
   })
 }
 

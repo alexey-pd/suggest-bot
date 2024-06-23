@@ -1,14 +1,6 @@
-import process from 'node:process'
 import z from 'zod'
 import { parseEnv, port } from 'znv'
 import { API_CONSTANTS } from 'grammy'
-
-try {
-  process.loadEnvFile()
-}
-catch {
-  // No .env file found
-}
 
 function createConfigFromEnvironment(environment: NodeJS.ProcessEnv) {
   const config = parseEnv(environment, {
@@ -24,6 +16,7 @@ function createConfigFromEnvironment(environment: NodeJS.ProcessEnv) {
       },
     },
     BOT_TOKEN: z.string(),
+    BOT_WEBHOOK: z.string().default(''),
     BOT_WEBHOOK_SECRET: z.string().default(''),
     BOT_SERVER_HOST: z.string().default('0.0.0.0'),
     BOT_SERVER_PORT: port().default(80),
@@ -34,6 +27,12 @@ function createConfigFromEnvironment(environment: NodeJS.ProcessEnv) {
   })
 
   if (config.BOT_MODE === 'webhook') {
+    // validate webhook url in webhook mode
+    z.string()
+      .url()
+      .parse(config.BOT_WEBHOOK, {
+        path: ['BOT_WEBHOOK'],
+      })
     // validate webhook secret in webhook mode
     z.string()
       .min(1)
@@ -44,11 +43,11 @@ function createConfigFromEnvironment(environment: NodeJS.ProcessEnv) {
 
   return {
     ...config,
-    isDev: process.env.NODE_ENV === 'development',
-    isProd: process.env.NODE_ENV === 'production',
+    isDev: Bun.env.NODE_ENV === 'development',
+    isProd: Bun.env.NODE_ENV === 'production',
   }
 }
 
 export type Config = ReturnType<typeof createConfigFromEnvironment>
 
-export const config = createConfigFromEnvironment(process.env)
+export const config = createConfigFromEnvironment(Bun.env)
