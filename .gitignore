@@ -132,7 +132,11 @@ data/
 
 # Jetbrains IDE
 .idea/
+.DS_Store
 
 # Ignore SQLite database
 *.db
 *.db-journal
+
+# Vercel project configuration
+.vercel
