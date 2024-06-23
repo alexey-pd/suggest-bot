@@ -22,7 +22,7 @@ import { i18n, isMultipleLocales } from '#root/bot/i18n.js'
 import { updateLogger } from '#root/bot/middlewares/index.js'
 import { config } from '#root/config.js'
 import { logger } from '#root/logger.js'
-import { greetingConversation } from '#root/bot/conversations/index.js'
+import { sendConversation } from '#root/bot/conversations/index.js'
 
 interface Options {
   sessionStorage?: StorageAdapter<SessionData>
@@ -36,6 +36,7 @@ export function createBot(token: string, options: Options = {}) {
     ContextConstructor: createContextConstructor({ logger }),
   })
   const protectedBot = bot.errorBoundary(errorHandler)
+  const [adminId] = JSON.parse(`${Bun.env.BOT_ADMINS}`)
 
   // Middlewares
   bot.api.config.use(parseMode('HTML'))
@@ -54,7 +55,7 @@ export function createBot(token: string, options: Options = {}) {
   )
   protectedBot.use(i18n)
   protectedBot.use(conversations())
-  protectedBot.use(greetingConversation())
+  protectedBot.use(sendConversation(adminId))
 
   // Handlers
   protectedBot.use(welcomeFeature)
