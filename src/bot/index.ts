@@ -23,6 +23,7 @@ import { updateLogger } from '#root/bot/middlewares/index.js'
 import { config } from '#root/config.js'
 import { logger } from '#root/logger.js'
 import { sendConversation } from '#root/bot/conversations/index.js'
+import { adminConversation } from '#root/bot/conversations/admin.js'
 
 interface Options {
   sessionStorage?: StorageAdapter<SessionData>
@@ -37,6 +38,7 @@ export function createBot(token: string, options: Options = {}) {
   })
   const protectedBot = bot.errorBoundary(errorHandler)
   const [adminId] = JSON.parse(`${Bun.env.BOT_ADMINS}`)
+  const channelId = `${Bun.env.BOT_CHANNEL_ID}`
 
   // Middlewares
   bot.api.config.use(parseMode('HTML'))
@@ -56,6 +58,7 @@ export function createBot(token: string, options: Options = {}) {
   protectedBot.use(i18n)
   protectedBot.use(conversations())
   protectedBot.use(sendConversation(adminId))
+  protectedBot.use(adminConversation(channelId))
 
   // Handlers
   protectedBot.use(welcomeFeature)
