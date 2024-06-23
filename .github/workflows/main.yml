@@ -18,9 +18,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run typecheck
+      - run: bun install --frozen-lockfile
+      - run: bun lint
+      - run: bun typecheck
 
   auto-merge:
     if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'

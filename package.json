@@ -15,6 +15,7 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "eslint . --fix",
     "typecheck": "tsc",
     "build": "tsc --noEmit false",
