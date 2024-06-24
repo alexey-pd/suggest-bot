@@ -14,13 +14,19 @@ jobs:
         node-version: [20.x]
     steps:
       - uses: actions/checkout@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run typecheck
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --reporter=silent
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
 
   auto-merge:
     if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
