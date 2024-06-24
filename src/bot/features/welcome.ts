@@ -1,7 +1,7 @@
 import { Composer } from 'grammy';
-import type { Context } from '~/bot/context.js';
-import { logHandle } from '~/bot/helpers/logging.js';
-import { SEND_CONVERSATION } from '~/bot/conversations/index.js';
+import type { Context } from '#root/bot/context.js';
+import { logHandle } from '#root/bot/helpers/logging.js';
+import { SEND_CONVERSATION } from '#root/bot/conversations/index.js';
 
 const composer = new Composer<Context>();
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env tsx
 
 import process from 'node:process';
-import { createBot } from '~/bot/index.js';
-import { config } from '~/config.js';
-import { logger } from '~/logger.js';
-import { createServer, createServerManager } from '~/server/index.js';
+import { createBot } from '#root/bot/index.js';
+import { config } from '#root/config.js';
+import { logger } from '#root/logger.js';
+import { createServer, createServerManager } from '#root/server/index.js';
 
 function onShutdown(cleanUp: () => Promise<void>) {
   let isShuttingDown = false;

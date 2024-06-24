@@ -8,23 +8,23 @@ import { Bot as TelegramBot, session } from 'grammy';
 import type {
   Context,
   SessionData,
-} from '~/bot/context.js';
+} from '#root/bot/context.js';
 import {
   createContextConstructor,
-} from '~/bot/context.js';
+} from '#root/bot/context.js';
 import {
   adminFeature,
   languageFeature,
   unhandledFeature,
   welcomeFeature,
-} from '~/bot/features/index.js';
-import { errorHandler } from '~/bot/handlers/index.js';
-import { i18n, isMultipleLocales } from '~/bot/i18n.js';
-import { updateLogger } from '~/bot/middlewares/index.js';
-import { config } from '~/config.js';
-import { logger } from '~/logger.js';
-import { sendConversation } from '~/bot/conversations/index.js';
-import { adminConversation } from '~/bot/conversations/admin.js';
+} from '#root/bot/features/index.js';
+import { errorHandler } from '#root/bot/handlers/index.js';
+import { i18n, isMultipleLocales } from '#root/bot/i18n.js';
+import { updateLogger } from '#root/bot/middlewares/index.js';
+import { config } from '#root/config.js';
+import { logger } from '#root/logger.js';
+import { sendConversation } from '#root/bot/conversations/index.js';
+import { adminConversation } from '#root/bot/conversations/admin.js';
 
 interface Options {
   sessionStorage?: StorageAdapter<SessionData>

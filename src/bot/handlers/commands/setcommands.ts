@@ -1,8 +1,8 @@
 import type { BotCommand } from '@grammyjs/types';
 import type { CommandContext } from 'grammy';
-import { i18n, isMultipleLocales } from '~/bot/i18n.js';
-import { config } from '~/config.js';
-import type { Context } from '~/bot/context.js';
+import { i18n, isMultipleLocales } from '#root/bot/i18n.js';
+import { config } from '#root/config.js';
+import type { Context } from '#root/bot/context.js';
 
 function getLanguageCommand(localeCode: string): BotCommand {
   return {

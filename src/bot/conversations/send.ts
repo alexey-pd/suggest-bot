@@ -1,6 +1,6 @@
 import type { Conversation } from '@grammyjs/conversations';
 import { createConversation } from '@grammyjs/conversations';
-import type { Context } from '~/bot/context.js';
+import type { Context } from '#root/bot/context.js';
 
 export const SEND_CONVERSATION = 'send';
 
