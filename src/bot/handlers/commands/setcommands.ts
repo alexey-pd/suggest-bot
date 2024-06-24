@@ -1,14 +1,14 @@
-import type { BotCommand } from '@grammyjs/types'
-import type { CommandContext } from 'grammy'
-import { i18n, isMultipleLocales } from '#root/bot/i18n.js'
-import { config } from '#root/config.js'
-import type { Context } from '#root/bot/context.js'
+import type { BotCommand } from '@grammyjs/types';
+import type { CommandContext } from 'grammy';
+import { i18n, isMultipleLocales } from '~/bot/i18n.js';
+import { config } from '~/config.js';
+import type { Context } from '~/bot/context.js';
 
 function getLanguageCommand(localeCode: string): BotCommand {
   return {
     command: 'language',
     description: i18n.t(localeCode, 'language_command.description'),
-  }
+  };
 }
 
 function getPrivateChatCommands(localeCode: string): BotCommand[] {
@@ -17,7 +17,7 @@ function getPrivateChatCommands(localeCode: string): BotCommand[] {
       command: 'start',
       description: i18n.t(localeCode, 'start_command.description'),
     },
-  ]
+  ];
 }
 
 function getPrivateChatAdminCommands(localeCode: string): BotCommand[] {
@@ -26,15 +26,15 @@ function getPrivateChatAdminCommands(localeCode: string): BotCommand[] {
       command: 'setcommands',
       description: i18n.t(localeCode, 'setcommands_command.description'),
     },
-  ]
+  ];
 }
 
 function getGroupChatCommands(_localeCode: string): BotCommand[] {
-  return []
+  return [];
 }
 
 export async function setCommandsHandler(ctx: CommandContext<Context>) {
-  const DEFAULT_LANGUAGE_CODE = 'en'
+  const DEFAULT_LANGUAGE_CODE = 'en';
 
   // set private chat commands
   await ctx.api.setMyCommands(
@@ -47,7 +47,7 @@ export async function setCommandsHandler(ctx: CommandContext<Context>) {
         type: 'all_private_chats',
       },
     },
-  )
+  );
 
   if (isMultipleLocales) {
     const requests = i18n.locales.map(code =>
@@ -65,9 +65,9 @@ export async function setCommandsHandler(ctx: CommandContext<Context>) {
           },
         },
       ),
-    )
+    );
 
-    await Promise.all(requests)
+    await Promise.all(requests);
   }
 
   // set group chat commands
@@ -75,7 +75,7 @@ export async function setCommandsHandler(ctx: CommandContext<Context>) {
     scope: {
       type: 'all_group_chats',
     },
-  })
+  });
 
   if (isMultipleLocales) {
     const requests = i18n.locales.map(code =>
@@ -85,9 +85,9 @@ export async function setCommandsHandler(ctx: CommandContext<Context>) {
           type: 'all_group_chats',
         },
       }),
-    )
+    );
 
-    await Promise.all(requests)
+    await Promise.all(requests);
   }
 
   // set private chat commands for owner
@@ -103,7 +103,7 @@ export async function setCommandsHandler(ctx: CommandContext<Context>) {
         chat_id: Number(config.BOT_ADMINS),
       },
     },
-  )
+  );
 
-  return ctx.reply(ctx.t('admin.commands-updated'))
+  return ctx.reply(ctx.t('admin.commands-updated'));
 }

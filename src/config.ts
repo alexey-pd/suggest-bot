@@ -1,10 +1,10 @@
-import process from 'node:process'
-import z from 'zod'
-import { parseEnv, port } from 'znv'
-import { API_CONSTANTS } from 'grammy'
+import process from 'node:process';
+import z from 'zod';
+import { parseEnv, port } from 'znv';
+import { API_CONSTANTS } from 'grammy';
 
 try {
-  process.loadEnvFile()
+  process.loadEnvFile();
 }
 catch {
   // No .env file found
@@ -31,7 +31,7 @@ function createConfigFromEnvironment(environment: NodeJS.ProcessEnv) {
       .array(z.enum(API_CONSTANTS.ALL_UPDATE_TYPES))
       .default([]),
     BOT_ADMINS: z.array(z.number()).default([]),
-  })
+  });
 
   if (config.BOT_MODE === 'webhook') {
     // validate webhook secret in webhook mode
@@ -39,16 +39,16 @@ function createConfigFromEnvironment(environment: NodeJS.ProcessEnv) {
       .min(1)
       .parse(config.BOT_WEBHOOK_SECRET, {
         path: ['BOT_WEBHOOK_SECRET'],
-      })
+      });
   }
 
   return {
     ...config,
     isDev: process.env.NODE_ENV === 'development',
     isProd: process.env.NODE_ENV === 'production',
-  }
+  };
 }
 
-export type Config = ReturnType<typeof createConfigFromEnvironment>
+export type Config = ReturnType<typeof createConfigFromEnvironment>;
 
-export const config = createConfigFromEnvironment(process.env)
+export const config = createConfigFromEnvironment(process.env);

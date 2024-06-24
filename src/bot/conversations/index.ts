@@ -1,2 +1,2 @@
-export * from './send.js'
-export * from './admin.js'
+export * from './send.js';
+export * from './admin.js';

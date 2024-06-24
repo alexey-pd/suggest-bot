@@ -132,6 +132,7 @@ data/
 
 # Jetbrains IDE
 .idea/
+.vscode
 .DS_Store
 
 # Ignore SQLite database

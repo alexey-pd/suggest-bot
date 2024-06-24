@@ -1,5 +1,5 @@
-import type { MiddlewareHandler } from 'hono'
-import { logger as _logger } from '#root/logger.js'
+import type { MiddlewareHandler } from 'hono';
+import { logger as _logger } from '~/logger.js';
 
 export function logger(): MiddlewareHandler {
   return async (c, next) => {
@@ -8,8 +8,8 @@ export function logger(): MiddlewareHandler {
       _logger.child({
         requestId: c.get('requestId'),
       }),
-    )
+    );
 
-    await next()
-  }
+    await next();
+  };
 }

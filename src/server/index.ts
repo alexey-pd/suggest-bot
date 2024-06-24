@@ -1,33 +1,33 @@
-import type { AddressInfo } from 'node:net'
-import { Hono } from 'hono'
-import { HTTPException } from 'hono/http-exception'
-import { serve } from '@hono/node-server'
-import { webhookCallback } from 'grammy'
-import { getPath } from 'hono/utils/url'
-import { requestId } from './middlewares/request-id.js'
-import { logger } from './middlewares/logger.js'
-import type { Env } from './environment.js'
-import type { Bot } from '#root/bot/index.js'
-import { config } from '#root/config.js'
-import { requestLogger } from '#root/server/middlewares/request-logger.js'
+import type { AddressInfo } from 'node:net';
+import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
+import { serve } from '@hono/node-server';
+import { webhookCallback } from 'grammy';
+import { getPath } from 'hono/utils/url';
+import { requestId } from './middlewares/request-id.js';
+import { logger } from './middlewares/logger.js';
+import type { Env } from './environment.js';
+import type { Bot } from '~/bot/index.js';
+import { config } from '~/config.js';
+import { requestLogger } from '~/server/middlewares/request-logger.js';
 
 export function createServer(bot: Bot) {
-  const server = new Hono<Env>()
+  const server = new Hono<Env>();
 
-  server.use(requestId())
-  server.use(logger())
+  server.use(requestId());
+  server.use(logger());
 
   if (config.isDev)
-    server.use(requestLogger())
+    server.use(requestLogger());
 
   server.onError(async (error, c) => {
     if (error instanceof HTTPException) {
       if (error.status < 500)
-        c.var.logger.info(error)
+        c.var.logger.info(error);
       else
-        c.var.logger.error(error)
+        c.var.logger.error(error);
 
-      return error.getResponse()
+      return error.getResponse();
     }
 
     // unexpected error
@@ -35,21 +35,21 @@ export function createServer(bot: Bot) {
       err: error,
       method: c.req.raw.method,
       path: getPath(c.req.raw),
-    })
+    });
     return c.json(
       {
         error: 'Oops! Something went wrong.',
       },
       500,
-    )
-  })
+    );
+  });
 
-  server.get('/', c => c.json({ status: true }))
+  server.get('/', c => c.json({ status: true }));
 
   server.get(`/${bot.token}`, async (c) => {
-    const hostname = c.req.header("x-forwarded-host");
-    if (typeof hostname === "string") {
-      const webhookUrl = new URL("webhook", `https://${hostname}`).href;
+    const hostname = c.req.header('x-forwarded-host');
+    if (typeof hostname === 'string') {
+      const webhookUrl = new URL('webhook', `https://${hostname}`).href;
       await bot.api.setWebhook(webhookUrl, {
         allowed_updates: config.BOT_ALLOWED_UPDATES,
         secret_token: config.BOT_WEBHOOK_SECRET,
@@ -69,15 +69,15 @@ export function createServer(bot: Bot) {
     webhookCallback(bot, 'hono', {
       secretToken: config.BOT_WEBHOOK_SECRET,
     }),
-  )
+  );
 
-  return server
+  return server;
 }
 
-export type Server = Awaited<ReturnType<typeof createServer>>
+export type Server = Awaited<ReturnType<typeof createServer>>;
 
 export function createServerManager(server: Server) {
-  let handle: undefined | ReturnType<typeof serve>
+  let handle: undefined | ReturnType<typeof serve>;
   return {
     start: (host: string, port: number) =>
       new Promise<AddressInfo>((resolve) => {
@@ -88,14 +88,14 @@ export function createServerManager(server: Server) {
             port,
           },
           info => resolve(info),
-        )
+        );
       }),
     stop: () =>
       new Promise<void>((resolve) => {
         if (handle)
-          handle.close(() => resolve())
+          handle.close(() => resolve());
         else
-          resolve()
+          resolve();
       }),
-  }
+  };
 }
