@@ -1,10 +1,12 @@
-<h1 align="center">🤖 Telegram Suggest Bot</h1>
-![Suggest](static/img.png)
+<article align="center">
+    <img align="left" width="75px" src="static/img.png">
+    <h1 align="right"> Telegram Suggest Bot</h1>
+</article>
 <img align="right" width="35%" src="https://github.com/bot-base/telegram-bot-template/assets/26162440/c4371683-3e99-4b1c-ae8e-11ccbea78f4b">
 
 Bot starter template based on [grammY](https://grammy.dev/) bot framework.
 
-## Features
+Features
 
 - Scalable structure
 - Config loading and validation
