@@ -1,5 +1,5 @@
-<h1 align="center">🤖 Telegram Bot Template</h1>
-
+<h1 align="center">🤖 Telegram Suggest Bot</h1>
+![Suggest](static/img.png)
 <img align="right" width="35%" src="https://github.com/bot-base/telegram-bot-template/assets/26162440/c4371683-3e99-4b1c-ae8e-11ccbea78f4b">
 
 Bot starter template based on [grammY](https://grammy.dev/) bot framework.
@@ -26,11 +26,11 @@ Bot starter template based on [grammY](https://grammy.dev/) bot framework.
 
 ## Usage
 
-Follow these steps to set up and run your bot using this template:
+Follow these steps to set up and run your own bot:
 
 1. **Create a New Repository**
 
-    Start by creating a new repository using this template. You can do this by clicking [here](https://github.com/bot-base/telegram-bot-template/generate).
+    Start by creating a new repository using template. You can do this by clicking [here](https://github.com/bot-base/telegram-bot-template/generate).
 
 2. **Environment Variables Setup**
 
@@ -48,18 +48,18 @@ Follow these steps to set up and run your bot using this template:
 
     Install the required dependencies:
     ```bash
-    npm install
+    pnpm install
     ```
     Start the bot in watch mode (auto-reload when code changes):
     ```bash
-    npm run dev
+    pnpm run dev
     ```
 
     **Production Mode:**
 
     Install Vercel CLI:
     ```bash
-    npm i -g vercel
+    pnpm i -g vercel
     ```
 
     Create a project:
@@ -94,12 +94,12 @@ Follow these steps to set up and run your bot using this template:
 
 ### List of Available Commands
 
-- `npm run lint` — Lint source code.
-- `npm run format` — Format source code.
-- `npm run typecheck` — Run type checking.
-- `npm run dev` — Start the bot in development mode.
-- `npm run start` — Start the bot.
-- `npm run start:force` — Starts the bot without type checking.
+- `pnpm run lint` — Lint source code.
+- `pnpm run format` — Format source code.
+- `pnpm run typecheck` — Run type checking.
+- `pnpm run dev` — Start the bot in development mode.
+- `pnpm run start` — Start the bot.
+- `pnpm run start:force` — Starts the bot without type checking.
 
 ### Directory Structure
 
@@ -199,7 +199,7 @@ git merge template/example/plugin-conversations -X theirs --squash --no-commit -
 3. Install dependencies
 
 ```sh
-npm i @grammyjs/conversations
+pnpm i @grammyjs/conversations
 ```
 
 4. Follow [the usage instructions](https://github.com/bot-base/telegram-bot-template/tree/example/plugin-conversations#usage) in the `example/plugin-conversations` branch.
@@ -228,7 +228,7 @@ git merge template/example/plugin-runner -X theirs --squash --no-commit --allow-
 3. Install dependencies
 
 ```sh
-npm i @grammyjs/runner
+pnpm i @grammyjs/runner
 ```
 
 4. Follow [the usage instructions](https://github.com/bot-base/telegram-bot-template/tree/example/plugin-runner#usage) in the `example/plugin-runner` branch.
@@ -257,8 +257,8 @@ git merge template/example/orm-prisma -X theirs --squash --no-commit --allow-unr
 3. Install dependencies
 
 ```sh
-npm i -D prisma
-npm i @prisma/client
+pnpm i -D prisma
+pnpm i @prisma/client
 ```
 
 4. Follow [the usage instructions](https://github.com/bot-base/telegram-bot-template/tree/example/orm-prisma#usage) in the `example/orm-prisma` branch.
@@ -288,12 +288,12 @@ git merge template/example/runtime-bun -X theirs --squash --no-commit --allow-un
 
 ```sh
 # remove Node-related dependencies
-npm r @types/node tsx tsc-watch
+pnpm r @types/node tsx tsc-watch
 
 # install dependencies
 bun i
 
-# remove npm lockfile
+# remove pnpm lockfile
 rm package-lock.json
 
 # install bun typings
