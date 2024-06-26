@@ -38,7 +38,6 @@ export function createBot(token: string, options: Options = {}) {
     ContextConstructor: createContextConstructor({ logger }),
   });
   const protectedBot = bot.errorBoundary(errorHandler);
-  const [adminId] = JSON.parse(`${process.env.BOT_ADMINS}`);
   const channelId = `${process.env.BOT_CHANNEL_ID}`;
 
   // Middlewares
@@ -58,7 +57,7 @@ export function createBot(token: string, options: Options = {}) {
   );
   protectedBot.use(i18n);
   protectedBot.use(conversations());
-  protectedBot.use(sendConversation(adminId));
+  protectedBot.use(sendConversation());
   protectedBot.use(adminConversation(channelId));
 
   // Handlers

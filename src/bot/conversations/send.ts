@@ -1,10 +1,11 @@
 import type { Conversation } from '@grammyjs/conversations';
 import { createConversation } from '@grammyjs/conversations';
 import type { Context } from '#root/bot/context.js';
+import { sendPhoto } from '#root/bot/features/send/send.js';
 
 export const SEND_CONVERSATION = 'send';
 
-export function sendConversation(adminId: string) {
+export function sendConversation() {
   return createConversation(
     async (conversation: Conversation<Context>, ctx: Context) => {
       const replyMsg = 'Please send me the photo!';
@@ -16,25 +17,7 @@ export function sendConversation(adminId: string) {
 
       if (fileId) {
         await ctx.reply(`Thanks for the photo!`);
-
-        await conversation.external(() => ctx.api.sendPhoto(
-          adminId,
-          fileId,
-          { caption: `@${ctx.from?.username || ctx.from?.first_name} /approve` },
-        ));
-
-        await conversation.external(() => ctx.api.sendMessage(
-          adminId,
-          fileId,
-        ));
-
-        await conversation.external(() => ctx.api.sendMessage(
-          adminId,
-          '--',
-        ));
-      }
-      else {
-        await ctx.reply(replyMsg);
+        await sendPhoto(ctx, fileId);
       }
     },
     SEND_CONVERSATION,

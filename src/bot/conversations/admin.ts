@@ -7,9 +7,7 @@ export const ADMIN_CONVERSATION = 'approve';
 export function adminConversation(channelId: string) {
   return createConversation(
     async (conversation: Conversation<Context>, ctx: Context) => {
-      await ctx.reply('Send photo id');
-      const { message } = await conversation.waitFor('message:text');
-      const fileId = message.text;
+      const fileId = ctx.callbackQuery?.message?.photo?.pop()?.file_id;
 
       if (fileId) {
         await ctx.api.sendPhoto(channelId, fileId);

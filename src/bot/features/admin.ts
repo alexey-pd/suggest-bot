@@ -17,7 +17,7 @@ feature.command(
   setCommandsHandler,
 );
 
-feature.command(ADMIN_CONVERSATION, logHandle('command-admin'), (ctx) => {
+feature.on('callback_query:data', logHandle('command-admin'), (ctx) => {
   return ctx.conversation.enter(ADMIN_CONVERSATION);
 });
 
