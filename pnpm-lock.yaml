@@ -27,8 +27,8 @@ importers:
         specifier: 3.8.0
         version: 3.8.0
       '@hono/node-server':
-        specifier: 1.11.2
-        version: 1.11.2
+        specifier: 1.11.4
+        version: 1.11.4
       callback-data:
         specifier: 1.1.1
         version: 1.1.1
@@ -385,8 +385,8 @@ packages:
   '@grammyjs/types@3.8.0':
     resolution: {integrity: sha512-5r2rUJ/s939iQEt6j2gyl1owbWwKAYAg2gQH7FfWIP1swL2assZ97vRUl8cBU3UEp7es9c/VioWeQjKbV6g4eg==}
 
-  '@hono/node-server@1.11.2':
-    resolution: {integrity: sha512-JhX0nUC66GeDxpIdMKWDRMEwtQBa64CY907iAF1sYqb4m2p2PdSU7zkbnNhAZLg/6IjSlTuj6CF307JlBXVvpg==}
+  '@hono/node-server@1.11.4':
+    resolution: {integrity: sha512-8TOiiiAqcFC6f62P7M9p6adQREAlWdVi1awehAwgWW+3R65/rKzHnLARO/Hu/466z01VNViBoogqatqXJMyItA==}
     engines: {node: '>=18.14.1'}
 
   '@humanwhocodes/config-array@0.11.14':
@@ -2278,7 +2278,7 @@ snapshots:
 
   '@grammyjs/types@3.8.0': {}
 
-  '@hono/node-server@1.11.2': {}
+  '@hono/node-server@1.11.4': {}
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
