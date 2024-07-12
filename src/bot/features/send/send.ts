@@ -23,4 +23,6 @@ export async function sendPhoto(ctx: Context, fileId: string, other?: Other<RawA
     fileId,
     params,
   );
+
+  await ctx.reply(`Thanks for the photo!`);
 }
