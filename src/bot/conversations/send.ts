@@ -16,7 +16,6 @@ export function sendConversation() {
       const fileId = photoMessage.message.photo?.pop()?.file_id;
 
       if (fileId) {
-        await ctx.reply(`Thanks for the photo!`);
         await sendPhoto(ctx, fileId);
       }
     },
