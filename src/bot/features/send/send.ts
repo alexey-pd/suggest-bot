@@ -18,11 +18,11 @@ export async function sendPhoto(ctx: Context, fileId: string, other?: Other<RawA
     caption: `@${ctx.from?.username || ctx.from?.first_name}`,
   };
 
+  await ctx.reply(`Thanks for the photo!`);
+
   await ctx.api.sendPhoto(
     adminId,
     fileId,
     params,
   );
-
-  await ctx.reply(`Thanks for the photo!`);
 }
