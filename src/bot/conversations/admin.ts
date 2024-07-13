@@ -11,6 +11,7 @@ export function adminConversation(channelId: string) {
 
       if (fileId) {
         await ctx.api.sendPhoto(channelId, fileId);
+        await ctx.editMessageReplyMarkup({ reply_markup: { inline_keyboard: [] } });
       }
     },
     ADMIN_CONVERSATION,
