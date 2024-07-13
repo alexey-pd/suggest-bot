@@ -7,6 +7,7 @@ const composer = new Composer<Context>();
 const feature = composer.chatType('private');
 
 feature.on('message', logHandle('unhandled-message'), (ctx) => {
+  if (ctx.message.pinned_message) return;
   return ctx.reply(ctx.t('unhandled'));
 });
 

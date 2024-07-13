@@ -12,10 +12,11 @@ feature.command('start', logHandle('command-start'), (ctx) => {
   return ctx.conversation.enter(SEND_CONVERSATION);
 });
 
-feature.on('message:photo', (ctx) => {
+feature.on('message:photo', async (ctx) => {
   const fileId = ctx.message.photo?.pop()?.file_id;
-  if (fileId)
-    return sendPhoto(ctx, fileId);
+  if (fileId) {
+    await sendPhoto(ctx, fileId);
+  }
 });
 
 feature.command(SEND_CONVERSATION, logHandle('command-send'), (ctx) => {
