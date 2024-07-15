@@ -6,7 +6,7 @@ import type { RawApi } from 'grammy/out/core/client';
 import type { Context } from '#root/bot/context.js';
 import { config } from '#root/config.js';
 
-type ContentType = 'photo' | 'video' | 'animation';
+type ContentType = 'photo' | 'video' | 'animation' | 'document';
 
 export async function sendMedia(ctx: Context, fileId: string, other?: Other<RawApi, 'sendPhoto', 'chat_id' | 'photo'>) {
   const keyboard = new InlineKeyboard()
@@ -20,7 +20,7 @@ export async function sendMedia(ctx: Context, fileId: string, other?: Other<RawA
     caption: `@${ctx.from?.username || ctx.from?.first_name}`,
   };
 
-  await ctx.reply(`Thanks for the photo!`);
+  await ctx.reply(`Thanks for content!`);
 
   const contentType = ctx.message?.photo
     ? 'photo'
@@ -28,12 +28,13 @@ export async function sendMedia(ctx: Context, fileId: string, other?: Other<RawA
       ? 'animation'
       : ctx?.message?.video
         ? 'video'
-        : undefined;
+        : 'document';
 
   const media = {
     animation: await ctx.api.sendAnimation(adminId, fileId, params),
     photo: await ctx.api.sendPhoto(adminId, fileId, params),
     video: await ctx.api.sendVideo(adminId, fileId, params),
+    document: await ctx.api.sendDocument(adminId, fileId, params),
   };
 
   const result = media[contentType as ContentType];

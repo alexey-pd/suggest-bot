@@ -10,11 +10,13 @@ export function adminConversation(channelId: string) {
       const animation = ctx.callbackQuery?.message?.animation?.file_id;
       const photo = ctx.callbackQuery?.message?.photo?.pop()?.file_id;
       const video = ctx.callbackQuery?.message?.video?.file_id;
-      const media = photo || animation || video;
+      const document = ctx.callbackQuery?.message?.document?.file_id;
+      const media = photo || animation || video || document;
 
       if (animation) await ctx.api.sendAnimation(channelId, animation);
       if (photo) await ctx.api.sendPhoto(channelId, photo);
       if (video) await ctx.api.sendVideo(channelId, video);
+      if (document) await ctx.api.sendDocument(channelId, document);
 
       if (media) {
         await ctx.api.unpinChatMessage(`${ctx.chat?.id}`);
