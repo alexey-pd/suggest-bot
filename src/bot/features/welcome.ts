@@ -19,6 +19,13 @@ feature.on('message:photo', async (ctx) => {
   }
 });
 
+feature.on('message:animation', async (ctx) => {
+  const fileId = ctx.message.animation.file_id;
+  if (fileId) {
+    await sendPhoto(ctx, fileId);
+  }
+});
+
 feature.command(SEND_CONVERSATION, logHandle('command-send'), (ctx) => {
   return ctx.conversation.enter(SEND_CONVERSATION);
 });

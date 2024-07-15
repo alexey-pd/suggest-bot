@@ -20,11 +20,9 @@ export async function sendPhoto(ctx: Context, fileId: string, other?: Other<RawA
 
   await ctx.reply(`Thanks for the photo!`);
 
-  const photo = await ctx.api.sendPhoto(
-    adminId,
-    fileId,
-    params,
-  );
+  const result = ctx.message?.animation
+    ? await ctx.api.sendAnimation(adminId, fileId, params)
+    : await ctx.api.sendPhoto(adminId, fileId, params);
 
-  await ctx.api.pinChatMessage(adminId, photo.message_id);
+  await ctx.api.pinChatMessage(adminId, result.message_id);
 }
