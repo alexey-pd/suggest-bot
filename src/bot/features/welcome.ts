@@ -15,28 +15,28 @@ feature.command('start', logHandle('command-start'), (ctx) => {
 feature.on('message:photo', async (ctx) => {
   const fileId = ctx.message.photo?.pop()?.file_id;
   if (fileId) {
-    await sendMedia(ctx, fileId);
+    await sendMedia(ctx, fileId, 'photo');
   }
 });
 
 feature.on('message:animation', async (ctx) => {
   const fileId = ctx.message.animation.file_id;
   if (fileId) {
-    await sendMedia(ctx, fileId);
+    await sendMedia(ctx, fileId, 'animation');
   }
 });
 
 feature.on('message:video', async (ctx) => {
   const fileId = ctx.message.video.file_id;
   if (fileId) {
-    await sendMedia(ctx, fileId);
+    await sendMedia(ctx, fileId, 'video');
   }
 });
 
 feature.on('message:file', async (ctx) => {
   const fileId = ctx?.message?.document?.file_id;
   if (fileId) {
-    await sendMedia(ctx, fileId);
+    await sendMedia(ctx, fileId, 'document');
   }
 });
 
