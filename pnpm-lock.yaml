@@ -39,8 +39,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0(grammy@1.24.1)
       hono:
-        specifier: 4.4.12
-        version: 4.4.12
+        specifier: 4.4.13
+        version: 4.4.13
       iso-639-1:
         specifier: 3.1.2
         version: 3.1.2
@@ -1173,8 +1173,8 @@ packages:
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
 
-  hono@4.4.12:
-    resolution: {integrity: sha512-Lx4Vwbws0IqFfXIVYychxUW0A4EE+7dn/jsjVeM34OXSA2Xs45MkDDP14Mzznp7LlDemUNHQG2uv2N5jQld0hA==}
+  hono@4.4.13:
+    resolution: {integrity: sha512-c6qqenclmQ6wpXzqiElMa2jt423PVCmgBreDfC5s2lPPpGk7d0lOymd8QTzFZyYC5mSSs6imiTMPip+gLwuW/g==}
     engines: {node: '>=16.0.0'}
 
   hosted-git-info@2.8.9:
@@ -3198,7 +3198,7 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono@4.4.12: {}
+  hono@4.4.13: {}
 
   hosted-git-info@2.8.9: {}
 
