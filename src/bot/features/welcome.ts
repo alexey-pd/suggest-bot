@@ -33,6 +33,13 @@ feature.on('message:video', async (ctx) => {
   }
 });
 
+feature.on('message:file', async (ctx) => {
+  const fileId = ctx?.message?.document?.file_id;
+  if (fileId) {
+    await sendMedia(ctx, fileId);
+  }
+});
+
 feature.command(SEND_CONVERSATION, logHandle('command-send'), (ctx) => {
   return ctx.conversation.enter(SEND_CONVERSATION);
 });
