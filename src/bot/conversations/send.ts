@@ -16,7 +16,7 @@ export function sendConversation() {
       const fileId = photoMessage.message.photo?.pop()?.file_id;
 
       if (fileId) {
-        await sendMedia(ctx, fileId);
+        await sendMedia(ctx, fileId, 'photo');
       }
     },
     SEND_CONVERSATION,
