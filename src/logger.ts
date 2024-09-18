@@ -1,4 +1,5 @@
 import { pino } from 'pino';
+import 'pino-pretty';
 import { config } from '#root/config.js';
 
 export const logger = pino({
