@@ -24,8 +24,8 @@ importers:
         specifier: 1.10.0
         version: 1.10.0(grammy@1.24.1)
       '@grammyjs/types':
-        specifier: 3.11.1
-        version: 3.11.1
+        specifier: 3.14.0
+        version: 3.14.0
       '@hono/node-server':
         specifier: 1.12.2
         version: 1.12.2(hono@4.6.1)
@@ -394,8 +394,8 @@ packages:
     peerDependencies:
       grammy: ^1.20.1
 
-  '@grammyjs/types@3.11.1':
-    resolution: {integrity: sha512-EXZnfV10W2YFrv3IAKR9jsuo39bHBBaNerKYIUEvofEUxnLHxi/HL0YwirZEunR2viiOFdu70Bkk3berQYeguw==}
+  '@grammyjs/types@3.14.0':
+    resolution: {integrity: sha512-uUVikYAiHNU8CvkeQ6YA/QPbMLgTTpFVLp83VkXCs423w6cDsvfdA6bcrQJGUnc/Q6zHQXXZUftXDYl2b/6L4A==}
 
   '@grammyjs/types@3.8.0':
     resolution: {integrity: sha512-5r2rUJ/s939iQEt6j2gyl1owbWwKAYAg2gQH7FfWIP1swL2assZ97vRUl8cBU3UEp7es9c/VioWeQjKbV6g4eg==}
@@ -2345,7 +2345,7 @@ snapshots:
     dependencies:
       grammy: 1.24.1
 
-  '@grammyjs/types@3.11.1': {}
+  '@grammyjs/types@3.14.0': {}
 
   '@grammyjs/types@3.8.0': {}
 
